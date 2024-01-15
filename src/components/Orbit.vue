@@ -219,17 +219,17 @@ $animationSpeed: .3s
   left: 50%
   visibility: visible
   opacity: 1
-  transition: margin $animationSpeed, width $animationSpeed, height $animationSpeed, visibility 0s $animationSpeed, opacity $animationSpeed 0s
+  transition: margin $animationSpeed, width $animationSpeed, height $animationSpeed, visibility 0s, opacity $animationSpeed
 
   &--next
     visibility: hidden
     opacity: 0
-    //transform: scale(1)
-    //transition-delay: $animationSpeed
+    transition-delay: 0s, 0s, 0s, $animationSpeed, 0s
 
   &--prev
     visibility: hidden
     opacity: 0
+    transition-delay: 0s, 0s, 0s, $animationSpeed, 0s
 
   &__item
     display: block
