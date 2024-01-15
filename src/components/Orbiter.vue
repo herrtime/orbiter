@@ -78,7 +78,11 @@ export default {
       // items loading
       if (this.loading) return;
       this.loading = true;
-      fetch(`https://xwmi-5dlx-wkyj.t7.xano.io/api:oUvfVMO5/receive_week?start_date=${moment(this.currentDate).format('YYYY-M-D')}`)
+      const d = moment(this.currentDate);
+      if (d.diff(moment(), 'days')) {
+        d.add(1, 'days');
+      }
+      fetch(`https://xwmi-5dlx-wkyj.t7.xano.io/api:oUvfVMO5/receive_week?start_date=${d.format('YYYY-M-D')}`)
         .then(response => response.json())
         .then((response) => {
           this.prepareData(response || []);
@@ -102,11 +106,12 @@ export default {
       // do the magic - remove one element and add another from loaded items
       if (this.animate === 'top') {
         this.dates.pop();
-        const last = items.pop();
+        const last = items.shift();
         this.dates.unshift(last);
       } else if (this.animate === 'bottom') {
         this.dates.shift();
-        const first = items.shift();
+        const first = items.pop();
+        console.log('first', first.contact_date);
         this.dates.push(first);
       }
     },
